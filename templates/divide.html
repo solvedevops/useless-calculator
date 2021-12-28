@@ -1,0 +1,46 @@
+{% extends 'header.html' %}
+
+
+{% block content %}
+  <main class="flex-shrink-0">
+    <div class="container">
+      <h1 class="mt-5">Division...</h1>
+      <p class="lead">Fill the input boxes below with any two numbers and submit to see result.</p>
+      <p>
+        <form class="form-horizontal" action="/divide" method="post">
+            <fieldset>
+            
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="First Number">First Number:</label>  
+              <div class="col-md-2">
+              <input id="First Number" name="First_Number" type="text" placeholder="" class="form-control input-md">
+                
+              </div>
+            </div>
+            
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="Second Number">Second Number:</label>  
+              <div class="col-md-2">
+              <input id="Second Number" name="Second_Number" type="text" placeholder="" class="form-control input-md">
+                
+              </div>
+            </div>
+            
+            <!-- Text Answer-->
+            {% if show==1 %}
+            <div class="form-group">
+              <div class="col-md-4">
+              <h1 class="mt-5">Answer is: {{ answer }}</h1>
+              </div>
+            </div>
+            {% else %}
+            {% endif %}
+            </fieldset>
+      </p>
+      <p><button type="submit" class="w-25 btn btn-lg btn-success">Submit</button></p>
+    </form>
+    </div>
+  </main>
+{% endblock %}
