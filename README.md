@@ -17,6 +17,18 @@ You are free to use it how ever you please.
 - HTML
 - Bootstrap
 
+### Quick Start
+Using docker-compose, you can bring up all the services in one go;
+
+    docker-compose up -d
+
+Or if you decide to bring the services up any other way, remember to set the service urls for discovery on the "useless calculator" service;
+
+    - ADD_URL_ENDPOINT=http://addition-service:5000
+    - DIVIDE_URL_ENDPOINT=http://division-service:5000
+    - MULTI_URL_ENDPOINT=http://multiplication-service:5000
+    - SUB_URL_ENDPOINT=http://subtraction-service:5000 
+
 
 ###  Screenshots
 

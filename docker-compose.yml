@@ -1,0 +1,38 @@
+version: '2.2'
+services:
+  useless-calculator:
+    image: akisakye/useless-calculator:latest
+    container_name: useless-calculator
+    environment:
+      - ADD_URL_ENDPOINT=http://addition-service:5000
+      - DIVIDE_URL_ENDPOINT=http://division-service:5000
+      - MULTI_URL_ENDPOINT=http://multiplication-service:5000
+      - SUB_URL_ENDPOINT=http://subtraction-service:5000 
+    ports:
+      - 80:5000
+    networks:
+      - useless
+  addition-service:
+    image: akisakye/useless-calculator-addition:latest
+    container_name: addition-service
+    networks:
+      - useless
+  division-service:
+    image: akisakye/useless-calculator-division:latest
+    container_name: division-service
+    networks:
+      - useless
+  multiplication-service:
+    image: akisakye/useless-calculator-multiplication:latest
+    container_name: multiplication-service
+    networks:
+      - useless
+  subtraction-service:
+    image: akisakye/useless-calculator-subtraction:latest
+    container_name: subtraction-service
+    networks:
+      - useless
+
+networks:
+  useless:
+    driver: bridge
