@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: useless-calculator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: useless-calculator
+  template:
+    metadata:
+      labels:
+        app: useless-calculator
+    spec:
+      containers:
+      - name: calculator
+        image: akisakye/useless-calculator:latest
+        ports:
+        - containerPort: 80
+
