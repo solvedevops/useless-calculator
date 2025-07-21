@@ -21,9 +21,19 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
+            mkdir -p ~/.docker/cli-plugins
+            curl -L https://github.com/christian-korneck/docker-pushrm/releases/download/v1.9.0/docker-pushrm_linux_amd64 -o ~/.docker/cli-plugins/docker-pushrm
+            chmod +x ~/.docker/cli-plugins/docker-pushrm
+            docker pushrm $DOCKERHUB_USERNAME/useless-calculator
+            chmod +x genrequirements.sh
+            ./genrequirements.sh alpine
             docker build -t $DOCKERHUB_USERNAME/useless-calculator:latest .
-            docker images
             docker tag $DOCKERHUB_USERNAME/useless-calculator:latest $DOCKERHUB_USERNAME/useless-calculator:$(echo $CIRCLE_SHA1 | cut -c -7)
+            ./genrequirements.sh aws-logs
+            docker build -t $DOCKERHUB_USERNAME/useless-calculator:aws-logs .
+            ./genrequirements.sh azure-logs
+            docker build -t $DOCKERHUB_USERNAME/useless-calculator:azure-logs .
+
 
       # Step 4: Push the Docker image to Docker Hub
       - run:
@@ -31,6 +41,8 @@ jobs:
           command: |
             docker push $DOCKERHUB_USERNAME/useless-calculator:latest
             docker push $DOCKERHUB_USERNAME/useless-calculator:$(echo $CIRCLE_SHA1 | cut -c -7)
+            docker push $DOCKERHUB_USERNAME/useless-calculator:aws-logs
+            docker push $DOCKERHUB_USERNAME/useless-calculator:azure-logs
 
 workflows:
   version: 2

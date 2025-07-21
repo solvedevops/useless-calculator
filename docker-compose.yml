@@ -1,35 +1,77 @@
-version: '2.2'
+version: '3.2'
 services:
   useless-calculator:
     image: akisakye/useless-calculator:latest
     container_name: useless-calculator
     environment:
-      - ADD_URL_ENDPOINT=http://addition-service:5000
-      - DIVIDE_URL_ENDPOINT=http://division-service:5000
-      - MULTI_URL_ENDPOINT=http://multiplication-service:5000
-      - SUB_URL_ENDPOINT=http://subtraction-service:5000 
+      - ADD_URL_ENDPOINT=http://addition-service:5001
+      - DIVIDE_URL_ENDPOINT=http://division-service:5003
+      - MULTI_URL_ENDPOINT=http://multiplication-service:5002
+      - SUB_URL_ENDPOINT=http://subtraction-service:5004
+      - ENV_NAME=development
+      - APP_NAME=useless-calculator
+      - TELEMETRY_MODE=console
+      # Uncomment for local file logging (structured: logs/env/app/service/)
+      # - TELEMETRY_MODE=local
+      # Uncomment for multiple outputs
+      # - TELEMETRY_MODE=console,local
+      
+      # For AWS CloudWatch (See README.md for the right docker image to use)
+      # - TELEMETRY_MODE=aws_cloudwatch
+      # - AWS_DEFAULT_REGION=us-east-1
+      
+      # For Azure Monitor (See README.md for the right docker image to use)
+      # - TELEMETRY_MODE=azure_monitor
+      # - APPLICATIONINSIGHTS_CONNECTION_STRING=your-connection-string
     ports:
       - 80:5000
+    volumes:
+      # Mount logs directory for local logging
+      - ./logs:/logs
     networks:
       - useless
   addition-service:
     image: akisakye/useless-calculator-addition:latest
     container_name: addition-service
+    environment:
+      - ENV_NAME=development
+      - APP_NAME=addition-service
+      - TELEMETRY_MODE=console
+    volumes:
+      - ./logs:/logs
     networks:
       - useless
   division-service:
     image: akisakye/useless-calculator-division:latest
     container_name: division-service
+    environment:
+      - ENV_NAME=development
+      - APP_NAME=division-service
+      - TELEMETRY_MODE=console
+    volumes:
+      - ./logs:/logs
     networks:
       - useless
   multiplication-service:
     image: akisakye/useless-calculator-multiplication:latest
     container_name: multiplication-service
+    environment:
+      - ENV_NAME=development
+      - APP_NAME=multiplication-service
+      - TELEMETRY_MODE=console
+    volumes:
+      - ./logs:/logs
     networks:
       - useless
   subtraction-service:
     image: akisakye/useless-calculator-subtraction:latest
     container_name: subtraction-service
+    environment:
+      - ENV_NAME=development
+      - APP_NAME=subtraction-service
+      - TELEMETRY_MODE=console
+    volumes:
+      - ./logs:/logs
     networks:
       - useless
 

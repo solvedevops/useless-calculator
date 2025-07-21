@@ -35,7 +35,14 @@
               <h1 class="mt-5">Answer is: {{ answer }}</h1>
               </div>
             </div>
-            {% else %}
+            {% elif error %}
+            <div class="form-group">
+              <div class="col-md-4">
+              <div class="alert alert-danger mt-3" role="alert">
+                {{ error }}
+              </div>
+              </div>
+            </div>
             {% endif %}
             </fieldset>
       </p>
