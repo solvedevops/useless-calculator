@@ -223,9 +223,9 @@ docker run -p 80:5000 \
 In order to keep the containers small, the default tag :latest includes only local and console storage for logs, metrics and traces.
 To demo cloud provide storage for logs, metrics and traces use the following tags. You still have to pass the TELEMETRY_MODE= env variable
 
-:latest for console and local storage
-:aws-logs for cloudwatch configuration (You need IAM for this to work)
-:azure-logs for Azure monitor (You need connection string for Azure monitor for this to work)
+- :latest for console and local storage
+- :aws-logs for cloudwatch configuration (You need IAM for this to work)
+- :azure-logs for Azure monitor (You need connection string for Azure monitor for this to work)
 
 ## 📁 Project Structure
 

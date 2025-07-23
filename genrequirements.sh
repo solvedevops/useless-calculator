@@ -68,6 +68,8 @@ opentelemetry-instrumentation-requests
 opentelemetry-instrumentation-urllib3
 opentelemetry-instrumentation-httpx
 EOF
+
+sed -i.bak 's/^#from opentelemetry\.instrumentation\.fastapi import FastAPIInstrumentor$/from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor/; s/^#FastAPIInstrumentor()\.instrument_app(app)$/FastAPIInstrumentor().instrument_app(app)/' app.py && rm app.py.bak
 }
 
 # Process the configuration argument

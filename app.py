@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from telemetry import create_telemetry_logger
-from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+#from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
 # Initialize telemetry
 telemetry = create_telemetry_logger("useless-calculator")
@@ -24,7 +24,7 @@ app = FastAPI(
     description="Main calculator service that orchestrates mathematical operations",
     version="2.0.0"
 )
-FastAPIInstrumentor().instrument_app(app)
+#FastAPIInstrumentor().instrument_app(app)
 
 app.mount("/static", StaticFiles(directory="templates/static"), name="static")
 templates = Jinja2Templates(directory="templates")
