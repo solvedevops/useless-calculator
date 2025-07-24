@@ -29,6 +29,15 @@ app = FastAPI(
 app.mount("/static", StaticFiles(directory="templates/static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+def static_url(path: str) -> str:
+    """Generate protocol-relative URLs for static files"""
+    if not path.startswith('/'):
+        path = '/' + path
+    return f"/static{path}"
+
+# Add the static_url function to the template globals
+templates.env.globals['static_url'] = static_url
+
 ADDURLENDPOINT = os.environ.get('ADD_URL_ENDPOINT')
 DIVIDEURLENDPOINT = os.environ.get('DIVIDE_URL_ENDPOINT')
 MULTIURLENDPOINT = os.environ.get('MULTI_URL_ENDPOINT')
